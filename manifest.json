@@ -1,0 +1,46 @@
+{
+  "manifest_version": 2,
+  "version": "1.0",
+  "author": "baldurk",
+  "name": "QuickFilter No Search",
+  "description": "Disables the behaviour of quick filter where pressing return to apply filter immediately will launch a global search",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "quickfilternosearch@baldurk.org",
+      "strict_min_version": "128.0"
+    }
+  },
+	"permissions": [
+			"messagesRead",
+			"messagesUpdate",
+			"accountsRead",
+			"storage",
+			"menus",
+			"compose",
+			"tabs",
+			"activeTab",
+			"management",
+			"notifications",
+			"messagesModify"
+	],
+  "experiment_apis": {
+    "qfns": {
+      "schema": "qfns_schema.json",
+      "parent": {
+        "scopes": [ "addon_parent" ],
+        "paths": [ [ "qfns" ] ],
+        "script": "qfns_implementation.js?1",
+        "events": ["startup"]
+      }
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  },
+  "background": {
+    "scripts": [
+      "background.js?1"
+    ]
+  }
+}

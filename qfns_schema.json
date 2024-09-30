@@ -1,0 +1,27 @@
+[
+	{
+		"namespace": "qfns",
+		"functions": [
+			{
+				"name": "monkeyPatch",
+				"description": "Monkey patch quick filter search bar command",
+				"type": "function",
+				"async": true,
+				"parameters": []
+			},
+      {
+        "name": "setPrefs",
+        "description": "set prefs for local use",
+        "type": "function",
+        "async": false,
+        "parameters": [
+          {
+            "name": "p",
+            "type": "any",
+            "description": "the preferences"
+          }
+ 				]
+      }
+		]
+	}
+]
