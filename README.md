@@ -2,7 +2,7 @@
 
 In recent (as of writing 128.x) versions of thunderbird, pressing enter/return in the quick filter text field to commit the typing causes an unexpected global search to appear.
 
-The thunderbird developers consider this expected/desired behaviour and didn't want to add an option for it, though I disagree that find-as-you-type filters very commonly have enter/return as a way to 'immediately' commit a search, since inevitably such filters need to have a short timeout to not be constantly churning while the user is actively typing.
+The [thunderbird developers consider this expected/desired behaviour](https://bugzilla.mozilla.org/show_bug.cgi?id=1913573) and didn't want to add an option for it, though I disagree that find-as-you-type filters very commonly have enter/return as a way to 'immediately' commit a search, since inevitably such filters need to have a short timeout to not be constantly churning while the user is actively typing.
 
 # Implementation
 
