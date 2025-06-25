@@ -1,13 +1,13 @@
 {
   "manifest_version": 2,
-  "version": "1.0",
+  "version": "1.1",
   "author": "baldurk",
   "name": "QuickFilter No Search",
   "description": "Disables the behaviour of quick filter where pressing return to apply filter immediately will launch a global search",
   "browser_specific_settings": {
     "gecko": {
       "id": "quickfilternosearch@baldurk.org",
-      "strict_min_version": "128.0"
+      "strict_min_version": "139.0"
     }
   },
 	"permissions": [

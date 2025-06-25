@@ -1,0 +1,67 @@
+name: Build & Release QuickFilterNoSearch XPI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'manifest.json'
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get version from manifest.json
+        id: get_version
+        run: echo "VERSION=$(jq -r .version manifest.json)" >> $GITHUB_OUTPUT
+
+      - name: Get previous version (on push only)
+        if: github.event_name == 'push'
+        id: old_version
+        run: |
+          git fetch origin main --deepen=2
+          if git show HEAD~1:manifest.json &>/dev/null; then
+            echo "OLDVERSION=$(git show HEAD~1:manifest.json | jq -r .version)" >> $GITHUB_OUTPUT
+          else
+            echo "OLDVERSION=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if version changed (skip release if unchanged, on push only)
+        if: github.event_name == 'push'
+        run: |
+          if [ "${{ steps.get_version.outputs.VERSION }}" == "${{ steps.old_version.outputs.OLDVERSION }}" ]; then
+            echo "No version change, skipping."
+            exit 0
+          fi
+
+      - name: Remove existing tag if it exists (for manual dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          git fetch --tags
+          TAG="v${{ steps.get_version.outputs.VERSION }}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            git push --delete origin "$TAG"
+          fi
+
+      - name: Create XPI
+        run: |
+          zip -r QuickFilterNoSearch.xpi . -x '.git/*' '.github/*'
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.get_version.outputs.VERSION }}
+          name: "QuickFilterNoSearch v${{ steps.get_version.outputs.VERSION }}"
+          body: "Release of QuickFilterNoSearch version ${{ steps.get_version.outputs.VERSION }}"
+          files: QuickFilterNoSearch.xpi
+          fail_on_unmatched_files: true
+          # Overwrite release and tag if they exist
+          prerelease: false
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

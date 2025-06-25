@@ -1,5 +1,5 @@
 (function (exports) {
-	let QuickFilterManager = ChromeUtils.import("resource:///modules/QuickFilterManager.jsm");
+	let QuickFilterManagerMod = ChromeUtils.importESModule("resource:///modules/QuickFilterManager.sys.mjs");
 	
 	const lazy = {};
 	ChromeUtils.defineESModuleGetters(lazy, {
@@ -8,7 +8,7 @@
 
 	let prefs = {disable_upsell: false};
 
-	// based on https://hg.mozilla.org/comm-central/file/3838e278a13de2d802bf3892c205517723ec4780/mail/modules/QuickFilterManager.sys.mjs#l1190
+	// based on https://hg.mozilla.org/comm-central/file/8934448a21ca9a774ccfb9cfc51303bda7e1577a/mail/modules/QuickFilterManager.sys.mjs#l1190
 	// only does a global search if the 'upsell' dialog is shown - meaning no results and the results have been shown
 	function searchOnlyWithNoResults(aState, aNode, aEvent, aDocument) {
 		const text = aEvent.detail || null;
@@ -42,7 +42,7 @@
 					},
 					monkeyPatch: async function() {
 						// monkey patch onCommand, 
-						QuickFilterManager.QuickFilterManager.filterDefsByName["text"].onCommand = searchOnlyWithNoResults;
+						QuickFilterManagerMod.QuickFilterManager.filterDefsByName["text"].onCommand = searchOnlyWithNoResults;
 					}
 				}
 			}
@@ -52,3 +52,4 @@
   exports.qfns = qfns;
 
 })(this)
+;
