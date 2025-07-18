@@ -1,5 +1,5 @@
 (function (exports) {
-	let QuickFilterManager = ChromeUtils.import("resource:///modules/QuickFilterManager.jsm");
+	let QuickFilterManager = ChromeUtils.importESModule("resource:///modules/QuickFilterManager.sys.mjs");
 	
 	const lazy = {};
 	ChromeUtils.defineESModuleGetters(lazy, {
