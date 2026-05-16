@@ -19,7 +19,7 @@
       "parent": {
         "scopes": [ "addon_parent" ],
         "paths": [ [ "qfns" ] ],
-        "script": "qfns_implementation.js?1",
+        "script": "qfns_implementation.js?2",
         "events": ["startup"]
       }
     }

@@ -1,6 +1,6 @@
 (function (exports) {
-	const { QuickFilterManager } = ChromeUtils.importESModule("resource:///modules/QuickFilterManager.sys.mjs");
-
+	let QuickFilterManager = ChromeUtils.importESModule("resource:///modules/QuickFilterManager.sys.mjs");
+	
 	const lazy = {};
 	ChromeUtils.defineESModuleGetters(lazy, {
 		GlodaMsgSearcher: "resource:///modules/gloda/GlodaMsgSearcher.sys.mjs"
