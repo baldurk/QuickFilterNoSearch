@@ -11,17 +11,7 @@
     }
   },
 	"permissions": [
-			"messagesRead",
-			"messagesUpdate",
-			"accountsRead",
-			"storage",
-			"menus",
-			"compose",
-			"tabs",
-			"activeTab",
-			"management",
-			"notifications",
-			"messagesModify"
+		"storage"
 	],
   "experiment_apis": {
     "qfns": {
